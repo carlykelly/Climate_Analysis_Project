@@ -21,13 +21,13 @@ app = Flask(__name__)
 def welcome():
     """List all available api routes."""
     return (
-        f"Welcome!<br/>"
+        f"Welcome! Please enter date as yyyy-mm-dd<br/>"
         f"Available Routes:<br/>"
         f"/api/v1.0/precipitation<br/>"
         f"/api/v1.0/stations<br/>"
         f"/api/v1.0/tobs<br/>"
-        f"/api/v1.0/YYYY-MM-DD<br/>"
-        f"/api/v1.0/YYYY-MM-DD/YYYY-MM-DD<br/>"
+        f"/api/v1.0/startdate<br/>"
+        f"/api/v1.0/startdate/enddate<br/>"
     )
 #%%
 @app.route("/api/v1.0/precipitation")
@@ -41,13 +41,7 @@ def precipitation():
     precip_df = precip_df.groupby('date').mean()
     return pd.Series(precip_df['prcp'],precip_df.index).to_json()
     
-    ### Putting the results into a dictionary where date is the key and prcp is value
-    #precip_dict = {}
-    #for index, row in precip_df.iterrows():
-        #precip_dict[row[0]]=[row[1]]
-    #precip_df = pd.DataFrame(precip_dict)
-    #precip_json = precip_df.to_json(orient = 'records')   
-    #return (precip_json)
+
 #%%
 @app.route("/api/v1.0/stations")
 def stations():
@@ -68,7 +62,7 @@ def tobs():
     one_year_ago = one_year_ago['Date'][0]
     tob_df = pd.read_sql(f"SELECT date, tobs AS temperature FROM measurement WHERE date >='{one_year_ago}' AND date <='{most_recent}'", conn)
     tob_list = list(tob_df['temperature'])
-    #tob_json = tob_df.to_json(orient='records')
+
 
     return jsonify(tob_list)
 #%%
@@ -78,7 +72,6 @@ def start_end(start,end):
     start_fix = start.replace("/", "-")
     end_fix = end.replace("/","-")
     temp_range = pd.read_sql(f"SELECT MIN(tobs) AS minimum_temperature, AVG(tobs) AS average_temperature, MAX(tobs) AS maximum_temperature FROM measurement WHERE date >='{start_fix}' AND date <='{end_fix}'", conn)
-    #temp_range_json = temp_range.to_json(orient='records')
     start_end_list = []
     start_end_list.append(temp_range['minimum_temperature'][0])
     start_end_list.append(temp_range['average_temperature'][0])
@@ -91,7 +84,6 @@ def start(start):
     conn = engine.connect()
     start_fix = start.replace("/", "-")
     temp_ranges = pd.read_sql(f"SELECT MIN(tobs) AS minimum_temperature, AVG(tobs) AS average_temperature, MAX(tobs) AS maximum_temperature FROM measurement WHERE date >='{start_fix}'", conn)
-    #temp_range_json = temp_range.to_json(orient='records')
     start_list = []
     start_list.append(temp_ranges['minimum_temperature'][0])
     start_list.append(temp_ranges['average_temperature'][0])
