@@ -1,4 +1,4 @@
-# SQL_Alchemy
+# Climate Analysis Project
 
 `Climate.ipynb` uses SQL Alchemy to connect to a SQLite databse and query the weather data for the state of Hawaii. Several graphs are created using Matplotlib including a stacked area chart. Scipy stats is used to determine if the difference in average temperature between December and June in Hawaii is statistically significant.
 
