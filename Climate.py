@@ -49,7 +49,6 @@ def stations():
     station_list = list(station_df['name'])
     return jsonify(station_list)
 
-
 #%%
 
 @app.route("/api/v1.0/tobs")
