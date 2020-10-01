@@ -85,7 +85,6 @@ def start(start):
     start_list.append(temp_ranges['average_temperature'][0])
     start_list.append(temp_ranges['maximum_temperature'][0])
     return jsonify(start_list)
-    
 
 if __name__ == '__main__':
     app.run(debug=True)
