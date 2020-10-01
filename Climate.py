@@ -61,7 +61,6 @@ def tobs():
     tob_df = pd.read_sql(f"SELECT date, tobs AS temperature FROM measurement WHERE date >='{one_year_ago}' AND date <='{most_recent}'", conn)
     tob_list = list(tob_df['temperature'])
 
-
     return jsonify(tob_list)
 #%%
 @app.route("/api/v1.0/<start>/<end>")
