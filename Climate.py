@@ -16,7 +16,6 @@ engine = create_engine("sqlite:///Resources/hawaii.sqlite")
 #%%
 app = Flask(__name__)
 #%%
-
 @app.route("/")
 def welcome():
     """List all available api routes."""
