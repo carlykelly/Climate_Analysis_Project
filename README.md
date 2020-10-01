@@ -1,6 +1,6 @@
 # Climate Analysis Project
 
-In this project we search to answer the question "Is Hawaiian weather truly beautiful year round".
+In this project we search to answer the question "Is Hawaiian weather truly beautiful year round"?
 
 ## Connecting to our Database
 `Climate.ipynb` uses SQL Alchemy to connect to a SQLite databse and query the weather data for the state of Hawaii. 
