@@ -1,4 +1,4 @@
-# SQL_Alchemy
+# Climate Analysis Project
 
 In this project we search to answer the question "Is Hawaiian weather truly beautiful year round".
 
