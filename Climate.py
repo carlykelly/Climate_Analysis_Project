@@ -40,7 +40,6 @@ def precipitation():
     precip_df = pd.read_sql(f"SELECT date, prcp FROM Measurement WHERE date >='{one_year_ago}' AND date <='{most_recent}' ORDER BY date", conn)
     precip_df = precip_df.groupby('date').mean()
     return pd.Series(precip_df['prcp'],precip_df.index).to_json()
-    
 
 #%%
 @app.route("/api/v1.0/stations")
